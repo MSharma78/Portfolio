@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meghna Sharma Projects</title>
+    <style> 
+    /* === BACKGROUND === */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      background: linear-gradient(-45deg, #07093e, #4f86e4, #a6b3f5);
+      background-size: 400% 400%;
+      animation: gradientFlow 15s ease infinite;
+      opacity: 0.6;
+      filter: blur(20px);
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* === PARTICLE CANVAS === */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+.navbar {
+  background-color:#0f1c2e;
+  overflow: hidden;
+  padding: 10px 0;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+.navbar ul li a:hover,
+.navbar ul li a.active {
+  color: #b1baf6; /* soft blue highlight on hover/active */
+}
+
+.projects {
+  /* background-color: #f9f9f9; */
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #111;
+}
+
+.projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.project-card {
+  background-color: #0F1C2E;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  max-width: 550px;
+  padding: 30px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.02);
+}
+
+.project-card img {
+  width: 468px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.project-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  /* color: #002244; */
+  color:#fff
+}
+
+.project-card p {
+  font-size: 1rem;
+  /* color: #333; */
+  color: white
+}
+
+.project-card ul {
+  list-style-type: disc;
+  text-align: left;
+  padding-left: 20px;
+  margin: 15px 0;
+  /* color: #444; */
+  color: white
+}
+
+.project-card li {
+  margin-bottom: 8px;
+}
+
+.project-card a {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #0059b3;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.project-card a:hover {
+  border-color: #0059b3;
+}
+
+
+</style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+  <canvas id="particle-canvas"></canvas>
+    <nav class="navbar">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="edu.html">Education</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="certi.html">Certifications</a></li>
+    <li><a href="proj.html">Projects</a></li>
+    <li><a href="contact.html">Contact Me</a></li>
+    <li><a href="https://www.linkedin.com/in/meghnasharmanyu/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+    <li><a href="https://github.com/MSharma78" target="_blank"><i class="fab fa-github"></i></a></li>
+</ul>
+</nav>
+
+<section class="projects" id="projects">
+  <h2 class="section-title">Projects</h2>
+  <div class="projects-container">
+    
+    <!-- Project 1 -->
+    <div class="project-card">
+      <!-- <img src="Bigdataproject.png" alt="NYC Turnstile Data"> -->
+      <h3>NYC Turnstile Data Analysis</h3>
+      <p><strong>Tools:</strong>Apache Spark, PySpark, Kafka, SparkML, MongoDB, Python, SQL, Pandas, Seaborn, Matplotlib</p>
+      <ul>
+        <li>Analyzed over 13 million records of NYC MTA Subway turnstile data to uncover ridership trends and station-level traffic patterns using PySpark and Pandas.</li>
+        <li>Built an end-to-end real-time data pipeline using Apache Kafka, PySpark Structured Streaming, and MongoDB for live prediction of subway foot traffic.</li>
+        <li>Developed and deployed machine learning models (Random Forest, Decision Tree, Linear Regression) using SparkML to predict hourly passenger entries/exits with 93.36% accuracy.</li>
+        <li>Engineered custom Kafka producer scripts to simulate realistic subway traffic, publishing streaming data every 3–5 seconds.</li>
+        <li>Designed insightful visualizations including heatmaps, boxplots, and bar charts to reveal peak hours, seasonal usage, and holiday traffic dips using Seaborn and Matplotlib.</li>
+        <li>Implemented delta-based transformation logic to convert cumulative turnstile counts into accurate interval-based foot traffic data.</li>
+        <li>Managed structured and semi-structured data using MongoDB to enable flexible querying and integration with Spark SQL.</li>
+      </ul>
+      <a href="https://github.com/igopalakrishna/nyc-subway-foot-traffic-prediction-and-forecasting" target="_blank">View on GitHub ↗</a>
+    </div>
+
+    <div class="project-card">
+  <img src="nice.png" alt="NICE Cruise Screenshot">
+  <h3>NICE Cruise Case Study</h3>
+  <p><strong>Tools:</strong> MySQL, PHP, HTML, CSS, JS, XAMPP</p>
+  <ul>
+    <li>Designed and Implemented robust relational database schema to manage cruise operations.</li>
+<li>Developed a RESTful web application using PHP, MySQL, HTML, CSS and JS.</li>
+<li>Enhanced security by implementing SQL injection prevention, password hashing, XSS protection and secure session handling.</li>
+<li>Integrated CRUD operations for user and admin interactions supporting booking, updating and cancelling functionalities.</li>
+<li>Created SQL queries providing insights into passenger behavior, trip occupancy and revenue trends.</li>
+<li>Built a data visualization module to analyze passenger statistics through interactive graphs and charts.</li>
+  <!-- <a href="https://github.com/yourusername/nice-cruise" target="_blank">View on GitHub ↗</a> -->
+</div>
+
+
+
+  </div>
+</section>
+
+<script>const canvas = document.getElementById("particle-canvas");
+const ctx = canvas.getContext("2d");
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+function createParticles() {
+  particles = [];
+  for (let i = 0; i < 150; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 2.5 + 1.2, // Bigger particles
+      speedX: Math.random() * 0.4 - 0.2,
+      speedY: Math.random() * 0.4 - 0.2,
+      opacity: Math.random() * 0.5 + 0.5 // 0.5 to 1
+    });
+  }
+}
+createParticles();
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let p of particles) {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
+    ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`; // Brighter white
+    ctx.shadowColor = "white"; // subtle glow
+    ctx.shadowBlur = 4;
+    ctx.fill();
+
+    p.x += p.speedX;
+    p.y += p.speedY;
+
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height;
+    if (p.y > canvas.height) p.y = 0;
+  }
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+</script>
+</body>
+</html>

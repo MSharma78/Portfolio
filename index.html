@@ -5,218 +5,276 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Meghna Sharma Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* === NAVBAR === */
-    .navbar {
-      background-color: #0f1c2e;
-      overflow: hidden;
-      padding: 10px 0;
-      width: 100%;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .navbar ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-    }
-    .navbar ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      font-family: 'Poppins', sans-serif;
-      font-size: 16px;
-      transition: color 0.3s ease;
-    }
-    .navbar ul li a:hover,
-    .navbar ul li a.active {
-      color: #b1baf6;
-    }
+    
+    /* ========== NAVBAR (mobile-first) ========== */
+:root {
+  --nav-bg: #0f1c2e;
+  --nav-text: #fff;
+  --nav-accent: #b1baf6;
+  --nav-height: 60px;
+  --shadow: 0 2px 8px rgba(0,0,0,.1);
+  --fs-link: clamp(.9rem, 2.5vw, 1rem);
+}
 
-    /* === BACKGROUND === */
-    .bg-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -2;
-      background: linear-gradient(-90deg, #07093e, #4f86e4, #a6b3f5);
-      background-size: 400% 400%;
-      animation: gradientFlow 15s ease infinite;
-      opacity: 0.6;
-      filter: blur(20px);
-    }
-
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* === PARTICLE CANVAS === */
-    #particle-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      opacity: 0.4;
-    }
-    .card {
-  width: 200px;
-  height: 180px;
-  border-radius: 15px;
-  box-shadow: 10px 10px 14px rgba(0,0,0,0.5);
+.navbar {
+  background-color: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+  height: var(--nav-height);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 .95rem;
   font-family: 'Poppins', sans-serif;
-  font-size: 22px;
-  /* font-weight: 400; */
-  color:#090438;
+}
+
+/* Brand / logo */
+.navbar .brand {
+  color: var(--nav-text);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+/* Hamburger button */
+.menu-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: 0;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  backdrop-filter: blur(4px);
-  background-image: url('card.jpg');
-  background-blend-mode: overlay;
 }
-  .card:hover {
-  box-shadow: 0 12px 24px rgba(255, 255, 255, 0.6);
-  transform: translateY(-6px);
+.menu-toggle .bar {
+  width: 100%;
+  height: 2px;
+  background: var(--nav-text);
+  transition: transform .25s ease, opacity .25s ease;
 }
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 50px;
-    max-width: 900px;
-    margin: 40px auto;
+
+/* Hide the list by default (mobile) */
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--nav-bg);
+  display: none;               /* closed by default */
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.25rem;
+  padding: 2rem 1rem 4rem;
+  overflow-y: auto;
 }
-html {
-  scroll-behavior: smooth;
+
+.nav-list.open {
+  display: flex;               /* opened on toggle */
 }
-.intro {
-  background-color: #ffffff;
-  color: #0f1c2e;
-  border-radius: 15px;
-  padding: 1px;
-  max-width: 80%;
-  margin: 30px auto;
+
+.nav-list li a {
+  color: var(--nav-text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--fs-link);
+  transition: color .2s ease;
+}
+
+.nav-list li a:hover,
+.nav-list li a.active {
+  color: var(--nav-accent);
+}
+
+/* ======= Desktop / larger screens ======= */
+@media (min-width: 768px) {
+  .navbar {
+    padding: 0 1.5rem;
+  }
+
+  .menu-toggle {
+    display: none;             /* no hamburger on desktop */
+  }
+
+  .nav-list {
+    position: static;
+    display: flex !important;  /* always visible */
+    flex-direction: row;
+    height: var(--nav-height);
+    padding: 0;
+    gap: 1.5rem;
+    background: transparent;
+  }
+}
+.no-scroll {
+  height: 100vh;
+  overflow: hidden;
+}
+/* ========== HERO SECTION ========== */
+
+.hero {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
   text-align: center;
-  
-}.intro h1 {
-  margin-bottom: 10px;
-  font-size: 32px;
+  background: linear-gradient(to right, #fdfbfb, #e2e4e4);
+  animation: fadeIn 1s ease;
+  font-family: 'Poppins', sans-serif;
 }
-.intro h3 {
-  font-weight: 400;
-  font-size: 18px;
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #0f1c2e;
+  font-weight: 700;
+  text-align: center;
 }
-body {
-    font-family: 'Poppins', sans-serif;
+
+.hero-content h1 span {
+  color: #5c6bc0;
 }
+
+.hero-content p {
+  font-size: 1.4rem;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  color: #333;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  padding: 0.7rem 1.4rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  /* background-color: #5c6bc0; */
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #3f51b5;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid #5c6bc0;
+  color: #5c6bc0;
+}
+
+.btn-outline:hover {
+  background-color: #5c6bc0;
+  color: white;
+}
+
+.hero-animation {
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .hero-content {
+    flex: 1;
+    padding-right: 2rem;
     
+  }
+
+  .hero-animation {
+    flex: 1;
+    margin-bottom: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0; transform: translateY(20px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+
+
   </style>
 </head>
 <body>
 
-  <div class="bg-animation"></div>
-  <canvas id="particle-canvas"></canvas>
+ <nav class="navbar" role="navigation">
+  <a href="index.html" class="brand">Meghna Sharma</a>
 
-  <nav class="navbar">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="edu.html">Education</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="certi.html">Certifications</a></li>
-      <li><a href="proj.html">Projects</a></li>
-      <li><a href="contact.html">Contact Me</a></li>
-      <li><a href="https://www.linkedin.com/in/meghnasharmanyu/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-      <li><a href="https://github.com/MSharma78" target="_blank"><i class="fab fa-github"></i></a></li>
-    </ul>
-  </nav>
+  <button class="menu-toggle" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
 
-<section class="intro"><h1>Hello! I'm Meghna Sharma 🙋‍♀️</h1><h3>I am a graduate student at NYU Tandon with a passion of data analysis - turning raw data to meaningful insights.</h3>
-  </section>
+  <ul id="primary-nav" class="nav-list">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="edu.html">Education</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="certi.html">Certifications</a></li>
+    <li><a href="proj.html">Projects</a></li>
+    <li><a href="contact.html">Contact Me</a></li>
+    <li>
+      <a href="https://www.linkedin.com/in/meghnasharmanyu/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i><span class="sr-only">LinkedIn</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/MSharma78" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i><span class="sr-only">GitHub</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 
-  <div class="card-container">
-  <div class="card" onclick="window.open('skills.html', '_blank')">
-    <h3>Skills</h3>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Hello! I'm <span>Meghna Sharma</span> 👋</h1>
+    <p> A graduate student at <strong>NYU Tandon</strong> with a passion for <strong>data analysis</strong> — turning raw data into meaningful insights.
+</p>
+
+    
+    <div class="hero-buttons">
+      <!-- <a href="proj.html" class="btn btn-outline">View Projects</a> -->
+      <a href="contact.html" class="btn btn-outline">Contact Me</a>
+    </div>
   </div>
 
-  <div class="card" onclick="window.open('proj.html', '_blank')">
-    <h3>Projects</h3>
-  </div>
-
-  <div class="card" onclick="window.open('certi.html', '_blank')">
-    <h3>Certifications</h3>
-  </div>
-
-  <div class="card" onclick="window.open('edu.html', '_blank')">
-    <h3>Education</h3>
-  </div>
-
-  <div class="card" onclick="window.open('contact.html', '_blank')">
-    <h3>Contact Me</h3>
-  </div>
-  </div>
+</section>
 
   <script>
-const canvas = document.getElementById("particle-canvas");
-const ctx = canvas.getContext("2d");
-let particles = [];
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navList   = document.getElementById('primary-nav');
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
-
-function createParticles() {
-  particles = [];
-  for (let i = 0; i < 150; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 2.5 + 1.2, // Bigger particles
-      speedX: Math.random() * 0.4 - 0.2,
-      speedY: Math.random() * 0.4 - 0.2,
-      opacity: Math.random() * 0.5 + 0.5 // 0.5 to 1
-    });
-  }
-}
-createParticles();
-
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let p of particles) {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
-    ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`; // Brighter white
-    ctx.shadowColor = "white"; // subtle glow
-    ctx.shadowBlur = 4;
-    ctx.fill();
-
-    p.x += p.speedX;
-    p.y += p.speedY;
-
-    if (p.x < 0) p.x = canvas.width;
-    if (p.x > canvas.width) p.x = 0;
-    if (p.y < 0) p.y = canvas.height;
-    if (p.y > canvas.height) p.y = 0;
-  }
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = navList.classList.toggle('open');
+    toggleBtn.setAttribute('aria-expanded', isOpen);
+    document.body.classList.toggle('no-scroll', isOpen);
+  });
 </script>
 
 </body>

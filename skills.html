@@ -2,154 +2,220 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meghna Sharma Skills</title>
 <style>
-  /* === BACKGROUND === */
-    .bg-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -2;
-      background: linear-gradient(-45deg, #07093e, #4f86e4, #a6b3f5);
-      background-size: 400% 400%;
-      animation: gradientFlow 15s ease infinite;
-      opacity: 0.6;
-      filter: blur(20px);
-    }
-
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* === PARTICLE CANVAS === */
-    #particle-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      opacity: 0.4;
-    }
-  body {
-   
-  color: white;
-  font-family: 'Poppins', sans-serif;
-  overflow-x: hidden;
-  position: relative;
-}
- .card {
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 22px;
-  color: #090438;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  backdrop-filter: blur(4px);
-  background-image: url('card.jpg');
-  background-blend-mode: overlay;
-  text-align: center;
+   /* ========== NAVBAR (mobile-first) ========== */
+:root {
+  --nav-bg: #0f1c2e;
+  --nav-text: #fff;
+  --nav-accent: #b1baf6;
+  --nav-height: 60px;
+  --shadow: 0 2px 8px rgba(0,0,0,.1);
+  --fs-link: clamp(.9rem, 2.5vw, 1rem);
 }
 
-.card:hover {
-  box-shadow: 0 12px 24px rgba(255, 255, 255, 0.6);
-  transform: translateY(-6px);
-}
-
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 40px;
-  justify-content: center;
-  max-width: 1200px;
-  margin: 40px auto;
-}
-
-.card h3 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding: 10px;
-  word-wrap: break-word;
-  text-align: center;
-}
-
-  .navbar {
-  background-color: #000000;
-  overflow: hidden;
-  padding: 10px 0;
-  width: 100%;
+.navbar {
+  background-color: var(--nav-bg);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow);
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 .95rem;
+  font-family: 'Poppins', sans-serif;
 }
-.navbar ul {
-  list-style-type: none;
+
+/* Brand / logo */
+.navbar .brand {
+  color: var(--nav-text);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+/* Hamburger button */
+.menu-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.menu-toggle .bar {
+  width: 100%;
+  height: 2px;
+  background: var(--nav-text);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+/* Hide the list by default (mobile) */
+.nav-list {
+  list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
+
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--nav-bg);
+  display: none;               /* closed by default */
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.25rem;
+  padding: 2rem 1rem 4rem;
+  overflow-y: auto;
 }
-.navbar ul li a {
-  color: #ffffff;
+
+.nav-list.open {
+  display: flex;               /* opened on toggle */
+}
+
+.nav-list li a {
+  color: var(--nav-text);
   text-decoration: none;
   font-weight: 600;
+  font-size: var(--fs-link);
+  transition: color .2s ease;
+}
+
+.nav-list li a:hover,
+.nav-list li a.active {
+  color: var(--nav-accent);
+}
+
+/* ======= Desktop / larger screens ======= */
+@media (min-width: 768px) {
+  .navbar {
+    padding: 0 1.5rem;
+  }
+
+  .menu-toggle {
+    display: none;             /* no hamburger on desktop */
+  }
+
+  .nav-list {
+    position: static;
+    display: flex !important;  /* always visible */
+    flex-direction: row;
+    height: var(--nav-height);
+    padding: 0;
+    gap: 1.5rem;
+    background: transparent;
+  }
+}
+.no-scroll {
+  height: 100vh;
+  overflow: hidden;
+}
+  /* ========== SKILLS PAGE STYLING ========== */
+
+body {
+  margin: 0;
   font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  transition: color 0.3s ease;
-}
-.navbar ul li a:hover,
-.navbar ul li a.active {
-  color: #b1baf6; /* soft blue highlight on hover/active */
-}
-html {
-  scroll-behavior: smooth;
-}
-.intro {
-  background-color: #ffffff;
+  background: linear-gradient(to right, #fdfbfb, #e2e4e4);
   color: #0f1c2e;
-  border-radius: 15px;
-  padding: 1px;
-  max-width: 30%;
-  margin: 30px auto;
-  text-align: center;
-  
-}.intro h1 {
-  font-size: 32px;
 }
+
+.card-container {
+  max-width: 1100px;
+  margin: 80px auto 40px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+}
+
+/* Card styles */
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px 10px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-top: 4px solid #b1baf6;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+.card h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+
+/* Optional: Add a smooth fade-in animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeInUp 0.4s ease forwards;
+}
+h2 {
+  padding:10px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 50px;
+}
+  
 </style>
 </head>
 <body>
-  <div class="bg-animation"></div>
-  <canvas id="particle-canvas"></canvas>
+  <nav class="navbar" role="navigation">
+  <a href="index.html" class="brand">Meghna Sharma</a>
 
-  <nav class="navbar">
-  <ul>
+  <button class="menu-toggle" aria-label="Open menu" aria-controls="primary-nav" aria-expanded="false">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <ul id="primary-nav" class="nav-list">
     <li><a href="index.html">Home</a></li>
     <li><a href="edu.html">Education</a></li>
-    <li><a href="skills.html">Skills</a></li>
+    <li><a href="skills.html" class="active">Skills</a></li>
     <li><a href="certi.html">Certifications</a></li>
     <li><a href="proj.html">Projects</a></li>
     <li><a href="contact.html">Contact Me</a></li>
-    <li><a href="https://www.linkedin.com/in/meghnasharmanyu/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-    <li><a href="https://github.com/MSharma78" target="_blank"><i class="fab fa-github"></i></a></li>
-</ul>
+    <li>
+      <a href="https://www.linkedin.com/in/meghnasharmanyu/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i><span class="sr-only">LinkedIn</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/MSharma78" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i><span class="sr-only">GitHub</span>
+      </a>
+    </li>
+  </ul>
 </nav>
-
-  <section class="intro"><h1>Skills</h1>
+  <section class="intro"><h2><strong>Skills</strong></h2>
   </section>
 
   <div class="card-container">
@@ -178,57 +244,17 @@ html {
   <div class="card"><h3>CSS</h3></div>
   <div class="card"><h3>JS</h3></div>
   <div class="card"><h3>Node.js</h3></div>
-  <div class="card"><h3>Express.js</h3></div>
-  
   </div>
+
 <script>
-  const canvas = document.getElementById("particle-canvas");
-const ctx = canvas.getContext("2d");
-let particles = [];
+  const toggleBtn = document.querySelector('.menu-toggle');
+  const navList   = document.getElementById('primary-nav');
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
-
-function createParticles() {
-  particles = [];
-  for (let i = 0; i < 150; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 2.5 + 1.2, // Bigger particles
-      speedX: Math.random() * 0.4 - 0.2,
-      speedY: Math.random() * 0.4 - 0.2,
-      opacity: Math.random() * 0.5 + 0.5 // 0.5 to 1
-    });
-  }
-}
-createParticles();
-
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let p of particles) {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
-    ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`; // Brighter white
-    ctx.shadowColor = "white"; // subtle glow
-    ctx.shadowBlur = 4;
-    ctx.fill();
-
-    p.x += p.speedX;
-    p.y += p.speedY;
-
-    if (p.x < 0) p.x = canvas.width;
-    if (p.x > canvas.width) p.x = 0;
-    if (p.y < 0) p.y = canvas.height;
-    if (p.y > canvas.height) p.y = 0;
-  }
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = navList.classList.toggle('open');
+    toggleBtn.setAttribute('aria-expanded', isOpen);
+    document.body.classList.toggle('no-scroll', isOpen);
+  });
 </script>
 </body>
 </html>

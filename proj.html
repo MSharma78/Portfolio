@@ -146,9 +146,31 @@
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   max-width: 500px;
-  padding: 30px;
+  width: 100%;
+  padding: 20px;
   text-align: center;
   transition: transform 0.3s ease;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+.project-card ul,
+.project-card p,
+.project-card li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+@media (max-width: 480px) {
+  .project-card {
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+
+  .project-card h3 {
+    font-size: 1.2rem;
+  }
 }
 
 .project-card:hover {
